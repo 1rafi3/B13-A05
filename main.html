@@ -11,6 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
+    <!-- icons -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
     <!-- daisyUI + tailwind  -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
@@ -22,3 +25,20 @@
         }
     </style>
 </head>
+
+<body>
+    <!-- navbar -->
+    <div class="navbar bg-base-100 shadow-sm">
+        <div class="flex-1">
+            <div class="flex items-center gap-1">
+                <a href=""><img class="w-9 h-9" src="./assets/github-logo.png" alt=""></a>
+                <a class="text-2xl font-semibold">GitHub Issues Tracker</a>
+            </div>
+        </div>
+        <div class="flex gap-2">
+            <div class="flex items-center relative left-10 opacity-50"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <input type="text" placeholder="Search issues..." class="rounded pl-8 text-[#64748B] p-2.5" >
+            <button class="border p-3 rounded bg-[#4A00FF] hover:cursor-pointer text-white"><i class="fa-solid fa-plus"></i> New Issue</button>
+        </div>
+    </div>
+</body>
