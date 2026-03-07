@@ -12,7 +12,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
 
     <!-- icons -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <!-- daisyUI + tailwind  -->
@@ -26,7 +28,7 @@
     </style>
 </head>
 
-<body>
+<body class="bg-[#F8FAFC]">
     <!-- navbar -->
     <div class="navbar bg-base-100 shadow-sm">
         <div class="flex-1">
@@ -36,9 +38,44 @@
             </div>
         </div>
         <div class="flex gap-2">
-            <div class="flex items-center relative left-10 opacity-50"><i class="fa-solid fa-magnifying-glass"></i></div>
-            <input type="text" placeholder="Search issues..." class="rounded pl-8 text-[#64748B] p-2.5" >
-            <button class="border p-3 rounded bg-[#4A00FF] hover:cursor-pointer text-white"><i class="fa-solid fa-plus"></i> New Issue</button>
+            <div class="flex items-center relative left-10 opacity-50"><i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <input type="text" placeholder="Search issues..." class="rounded pl-8 text-[#64748B] p-2.5">
+            <button class="border p-3 rounded bg-[#4A00FF] hover:cursor-pointer text-white"><i
+                    class="fa-solid fa-plus"></i> New Issue</button>
         </div>
     </div>
+
+    <section class="w-10/12 m-auto mt-16">
+
+        <!-- toogle button  -->
+        <div id="toogle button" class="p-6 bg-white shadow-2xl mb-4 rounded">
+            <button class="btn btn-primary w-1/10">All</button>
+            <button class="btn btn-primary w-1/10">Open</button>
+            <button class="btn btn-primary w-1/10">Closed</button>
+        </div>
+        <!-- Issue Tracker  -->
+        <div class="rounded shadow-2xl bg-white p-6 flex justify-between items-center">
+            <div class="flex gap-2">
+                <div class="bg-[#ECE4FF] w-14 p-2 flex justify-center rounded-full"><img src="./assets/Aperture.png"
+                        alt="">
+                </div>
+                <div>
+                    <p class="font-semibold text-[20px]">50 Issues</p>
+                    <p class="text-[#64748B] text-[20px]">Track and manage your project issues</p>
+                </div>
+            </div>
+            <div class="flex gap-4">
+                <p><i class="fa-solid fa-circle" style="color: rgb(0, 169, 110);"></i>Open</p>
+                <p><i class="fa-solid fa-circle" style="color: rgb(168, 85, 247);"></i>Closed</p>
+            </div>
+        </div>
+
+        <!-- card -->
+
+        <div class="my-1 bg-white rounded">
+               
+        </div>
+    </section>
+
 </body>
