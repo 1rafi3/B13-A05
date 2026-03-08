@@ -76,7 +76,10 @@
         <div class="shadow-2xl bg-[#FBFBFB] my-1 rounded">
 
             <!-- card  -->
-            <div id="cards" class="p-5 grid grid-cols-4 gap-2">
+
+            <!-- grid-cols-[repeat(auto-fit,minmax(280px,1fr))] === eita diye bujhay j jotota card paro create koro ebong oi gulake auto fit koro shorbonimno size hote parbe 280px ekta card er 1 fr jaygay but jdi jayga thake tahole stretch koro stretch korar kaj ta auto fit e korbe maybe idk -->
+
+            <div id="cards" class="p-5 grid grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
                 <!-- <div class="card bg-base-100 bg-white"> -->
                 <!-- <div class="bg-base-100 p-0 bg-white border-t-4 border-t-[#00A96E]">
                     <div class="p-3">
@@ -98,12 +101,18 @@
 
                     <div class="border-2 border-[#F8FAFC]"></div>
 
-                    <div class="bg-white p-3 flex flex-col">
-                        <p>userdata</p>
-                        <p>Date</p>
+                    <div class="bg-white p-3 min-h-20 flex justify-between">
+                        <div>
+                            <p>author</p>
+                            <p>assignee</p>
+                        </div>
+                        <div>
+                            <p>createdAt</p>
+                            <p>updatedAt</p>
+                        </div>
                     </div>
                 </div> -->
-            </div> 
+            </div>
         </div>
     </section>
 
