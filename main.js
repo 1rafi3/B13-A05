@@ -11,7 +11,10 @@ function displayIssues(issues) {
     // console.log(issues);
     issues.forEach((issue) => {
         const card = document.createElement("div");
-        card.innerHTML = `${issue.status ==="open"?`<div class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#00A96E]">
+        card.classList.add("issue-card");
+        card.dataset.status = issue.status;
+
+        card.innerHTML = `${issue.status === "open" ? `<div class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#00A96E]">
                     <div class="p-3 h-72">
                         <figure class="flex justify-between">
                             <img src="./assets/Open-Status.png"/>
@@ -39,7 +42,7 @@ function displayIssues(issues) {
                             <p>updated: ${issue.updatedAt.slice(0, 10)}</p>
                         </div>
                     </div>
-                </div>`:`<div class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#A855F7]">
+                </div>`: `<div class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#A855F7]">
                     <div class="p-3 h-72">
                         <figure class="flex justify-between">
                             <img src="./assets/Closed- Status .png"/>
@@ -84,6 +87,34 @@ function displayIssues(issues) {
     })
 }
 
+function applyStatusFilter(status) {
+    const allCards = document.querySelectorAll("#cards .issue-card");
+    let visibleCount = 0;
+
+    allCards.forEach((card) => {
+        const isVisible = status === "all" || card.dataset.status === status;
+        card.style.display = isVisible ? "block" : "none";
+        if (isVisible) {
+            visibleCount++;
+        }
+    });
+
+    // Counter ta update kortesi eikhane 
+    const issueCounter = document.getElementById("issue-counter");
+    issueCounter.innerHTML = visibleCount;
+}
+function showAll() {
+    applyStatusFilter("all");
+}
+
+function showOpen() {
+    applyStatusFilter("open");
+}
+
+function showClose() {
+    applyStatusFilter("closed");
+}
+
 function labelCheker(label) {
     const btn = document.createElement("button");
     btn.classList.add("btn", "btn-soft", "rounded-4xl");
@@ -112,21 +143,23 @@ function labelCheker(label) {
 
 
 
-function priorityBtnSelector(priority){
+function priorityBtnSelector(priority) {
     const btn = document.createElement("button");
-    btn.classList.add("btn","btn-soft","rounded-4xl");
-    if(priority==="high"){
+    btn.classList.add("btn", "btn-soft", "rounded-4xl");
+    if (priority === "high") {
         btn.innerHTML = `HIGH`;
         btn.classList.add("btn-secondary")
-    }else if(priority==="medium"){  
+    } else if (priority === "medium") {
         btn.innerHTML = `Medium`;
         btn.classList.add("btn-warning")
-    }else if(priority ==="low"){
+    } else if (priority === "low") {
         btn.innerHTML = `LOW`;
         btn.classList.add("default")
     }
     return btn;
 }
+
+
 
 
 issues();

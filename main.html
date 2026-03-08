@@ -50,9 +50,9 @@
 
         <!-- toogle button  -->
         <div id="toogle button" class="p-6 bg-white shadow-2xl mb-4 rounded">
-            <button class="btn btn-primary w-1/10">All</button>
-            <button class="btn btn-primary w-1/10">Open</button>
-            <button class="btn btn-primary w-1/10">Closed</button>
+            <button onclick="showAll()" class="btn btn-primary w-1/10">All</button>
+            <button onclick="showOpen()" class="btn btn-primary w-1/10">Open</button>
+            <button onclick="showClose()" class="btn btn-primary w-1/10">Closed</button>
         </div>
         <!-- Issue Tracker  -->
         <div class="rounded shadow-2xl bg-white p-6 flex justify-between items-center">
@@ -61,7 +61,7 @@
                         alt="">
                 </div>
                 <div>
-                    <p class="font-semibold text-[20px]">50 Issues</p>
+                    <p class="font-semibold text-[20px]"><span id="issue-counter">50</span> Issues</p>
                     <p class="text-[#64748B] text-[20px]">Track and manage your project issues</p>
                 </div>
             </div>
@@ -79,7 +79,7 @@
 
             <!-- grid-cols-[repeat(auto-fit,minmax(280px,1fr))] === eita diye bujhay j jotota card paro create koro ebong oi gulake auto fit koro shorbonimno size hote parbe 280px ekta card er 1 fr jaygay but jdi jayga thake tahole stretch koro stretch korar kaj ta auto fit e korbe maybe idk -->
 
-            <div id="cards" class="p-5 grid grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
+            <div id="cards" class="p-5 grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4">
                 <!-- <div class="card bg-base-100 bg-white"> -->
                 <!-- <div class="bg-base-100 p-0 bg-white border-t-4 border-t-[#00A96E]">
                     <div class="p-3">
