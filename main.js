@@ -10,6 +10,24 @@ let issueDetailsModal = document.getElementById("issueDetailsModal");
 const modal = document.getElementById("modal");
 // console.log(modal);
 
+//toggle button 
+
+const allBtn = document.getElementById("allBtn");
+const openBtn = document.getElementById("openBtn");
+const closed = document.getElementById("closed");
+
+
+function btnController(button) {
+    
+    allBtn.classList.remove("btn-primary");
+    openBtn.classList.remove("btn-primary");
+    closed.classList.remove("btn-primary");
+
+    button.classList.add("btn-primary");
+
+}
+
+
 
 async function issues() {
     spinner.classList.remove("hidden");
@@ -41,7 +59,7 @@ function displayIssues(issues) {
         card.dataset.status = issue.status;
         card.dataset.issueId = issue.id;
         let unique = count++;
-        card.innerHTML = `${issue.status === "open" ? `<div class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#00A96E]">
+        card.innerHTML = `${issue.status === "open" ? `<div onclick="openModal('${issue.id}')" class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#00A96E]">
                     <div class="p-3 h-72">
                         <figure class="flex justify-between">
                             <img src="./assets/Open-Status.png"/>
@@ -49,7 +67,7 @@ function displayIssues(issues) {
                         </figure>
                         <div class="mt-3">
                         
-                            <h2 onclick="openModal('${issue.id}')" class="card-title">${issue.title}</h2>
+                            <h2 class="card-title">${issue.title}</h2>
                             <p class="line-clamp-2">${issue.description}
                             </p>
                             <div class="card-actions justify-start mt-3 flex" id="label-buttons">
@@ -70,14 +88,14 @@ function displayIssues(issues) {
                             <p>updated: ${issue.updatedAt.slice(0, 10)}</p>
                         </div>
                     </div>
-                </div>`: `<div class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#A855F7]">
+                </div>`: `<div onclick="openModal('${issue.id}')" class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#A855F7]">
                     <div class="p-3 h-72">
                         <figure class="flex justify-between">
                             <img src="./assets/Closed- Status .png"/>
                             <div id="priority-btn"></div>
                         </figure>
                         <div class="mt-3">
-                            <h2 onclick="openModal('${issue.id}')" class="card-title">${issue.title}</h2>
+                            <h2 class="card-title">${issue.title}</h2>
                             <p class="line-clamp-2">${issue.description}
                             </p>
                             <div class="card-actions justify-start mt-3 flex" id="label-buttons">
@@ -249,7 +267,7 @@ const searchInput = document.getElementById("input-text");
 // console.log(searchInput);
 
 searchInput.addEventListener("input", async function () {
-    const keyword = searchInput.value.trim().toLowerCase();
+    const keyword = searchInput.value.trim();
 
     if (!keyword) {
         await issues();

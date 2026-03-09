@@ -50,9 +50,9 @@
 
         <!-- toogle button  -->
         <div id="toggle-button" class="p-6 bg-white shadow-2xl mb-4 rounded">
-            <button onclick="showAll()" class="btn btn-primary w-1/10">All</button>
-            <button onclick="showOpen()" class="btn btn-primary w-1/10">Open</button>
-            <button onclick="showClose()" class="btn btn-primary w-1/10">Closed</button>
+            <button onclick="showAll(); btnController(allBtn)" id="allBtn" class="btn btn-primary w-1/10">All</button>
+            <button onclick="showOpen(); btnController(openBtn)" id="openBtn" class="btn btn-primary w-1/10">Open</button>
+            <button onclick="showClose(); btnController(closed)" id="closed" class="btn btn-primary w-1/10">Closed</button>
         </div>
         <!-- Issue Tracker  -->
         <div class="rounded shadow-2xl bg-white p-6 flex justify-between items-center">
