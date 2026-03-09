@@ -40,7 +40,7 @@
         <div class="flex gap-2">
             <div class="flex items-center relative left-10 opacity-50"><i class="fa-solid fa-magnifying-glass"></i>
             </div>
-            <input type="text" placeholder="Search issues..." class="rounded pl-8 text-[#64748B] p-2.5">
+            <input id="input-text" type="text" placeholder="Search issues..." class="rounded pl-8 text-[#64748B] p-2.5">
             <button class="border p-3 rounded bg-[#4A00FF] hover:cursor-pointer text-white"><i
                     class="fa-solid fa-plus"></i> New Issue</button>
         </div>
@@ -49,7 +49,7 @@
     <section class="w-10/12 m-auto mt-16">
 
         <!-- toogle button  -->
-        <div id="toogle button" class="p-6 bg-white shadow-2xl mb-4 rounded">
+        <div id="toggle-button" class="p-6 bg-white shadow-2xl mb-4 rounded">
             <button onclick="showAll()" class="btn btn-primary w-1/10">All</button>
             <button onclick="showOpen()" class="btn btn-primary w-1/10">Open</button>
             <button onclick="showClose()" class="btn btn-primary w-1/10">Closed</button>
@@ -76,6 +76,40 @@
         <div class="shadow-2xl bg-[#FBFBFB] my-1 rounded">
 
             <!-- card  -->
+            <div id="modal" class="">
+                <dialog id="issueDetailsModal" class="modal">
+                    <div class="modal-box">
+                        <h1 id="modal-title">Title</h1>
+                        <div id="modal-description" class="flex gap-2 items-center justify-start">
+                            <div><button class="btn btn-primary">Opened</button></div>
+                            <div class="border h-1 w-1 rounded-2xl border-[#64748B]"></div>
+                            <div><p>Opened By Fahim Ahmed</p></div>
+                            <div class="border h-1 w-1 rounded-2xl border-[#64748B]"></div>
+                            <div><p>22/12/2023</p></div>
+                        </div>
+                        <div id="modal-label" class="my-6">
+                            <button class="btn btn-soft btn-secondary rounded-4xl">High</button>
+                            <button class="btn btn-soft btn-secondary rounded-4xl">High</button>
+                        </div>
+                        <div>
+                            <p id="modal-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime totam quis, perspiciatis quaerat modi beatae?</p>
+                        </div>
+                        <div class="flex justify-between p-4 bg-[#F8FAFC] rounded-2xl my-6">
+                            <div>
+                                <p>Assignee: </p>
+                                <p id="modal-assignee-name">Fahim Ahmed</p>
+                            </div>
+                            <div>
+                                <p id="modal-priority">Priority:</p>
+                                <button id="modal-button" class="btn btn-soft btn-secondary rounded-4xl">High</button>
+                            </div>
+                        </div>
+                        <div class="flex justify-end">
+                            <button class="btn btn-primary" onclick="issueDetailsModal.close()">Close</button>
+                        </div>
+                    </div>
+                </dialog>
+            </div>
 
             <!-- grid-cols-[repeat(auto-fit,minmax(280px,1fr))] === eita diye bujhay j jotota card paro create koro ebong oi gulake auto fit koro shorbonimno size hote parbe 280px ekta card er 1 fr jaygay but jdi jayga thake tahole stretch koro stretch korar kaj ta auto fit e korbe maybe idk -->
 
@@ -113,9 +147,11 @@
                     </div>
                 </div> -->
             </div>
+            <div id="loading" class="justify-center items-center flex hidden">
+                <span class="loading loading-ring loading-xl"></span>
+            </div>
         </div>
     </section>
-
 
     <!-- JS angta  -->
     <script src="./main.js"></script>

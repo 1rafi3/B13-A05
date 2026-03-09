@@ -1,11 +1,37 @@
+const spinner = document.getElementById("loading");
+const issueTitle = document.getElementById("modal-title");
+const issueDescription = document.getElementById("modal-description");
+const issuelabelContainer = document.getElementById("modal-labels");
+const issueContent = document.getElementById("modal-content");
+const issueAssignee = document.getElementById("modal-assignee-name");
+const issuePriority = document.getElementById("modal-priority");
+const issuebutton = document.getElementById("modal-button");
+let issueDetailsModal = document.getElementById("issueDetailsModal");
+const modal = document.getElementById("modal");
+// console.log(modal);
+
+
 async function issues() {
+    spinner.classList.remove("hidden");
     const res = await fetch("https://phi-lab-server.vercel.app/api/v1/lab/issues");
     const data = await res.json();
     // console.log(data);
-    displayIssues(data.data);
+    renderIssueCards(data.data);
+    spinner.classList.add("hidden");
 }
 
 let count = 1;
+
+function renderIssueCards(issueList) {
+    const cardsContainer = document.getElementById("cards");
+    cardsContainer.innerHTML = "";
+    count = 1;
+    displayIssues(issueList);
+
+    const issueCounter = document.getElementById("issue-counter");
+    issueCounter.innerHTML = issueList.length;
+    // console.log(issueList.length);
+}
 
 function displayIssues(issues) {
     // console.log(issues);
@@ -13,7 +39,8 @@ function displayIssues(issues) {
         const card = document.createElement("div");
         card.classList.add("issue-card");
         card.dataset.status = issue.status;
-
+        card.dataset.issueId = issue.id;
+        let unique = count++;
         card.innerHTML = `${issue.status === "open" ? `<div class="card bg-base-100 p-0 bg-white rounded-2xl border-t-4 border-t-[#00A96E]">
                     <div class="p-3 h-72">
                         <figure class="flex justify-between">
@@ -21,7 +48,8 @@ function displayIssues(issues) {
                             <div id="priority-btn"></div>
                         </figure>
                         <div class="mt-3">
-                            <h2 class="card-title">${issue.title}</h2>
+                        
+                            <h2 onclick="openModal('${issue.id}')" class="card-title">${issue.title}</h2>
                             <p class="line-clamp-2">${issue.description}
                             </p>
                             <div class="card-actions justify-start mt-3 flex" id="label-buttons">
@@ -34,8 +62,8 @@ function displayIssues(issues) {
 
                     <div class=" rounded-2xl p-3 h-22 flex justify-between ">
                         <div>
-                            <p>#${count++} ${issue.author}</p>
-                            <p>assignee ${issue.assignee}</p>
+                            <p>#${unique} ${issue.author}</p>
+                            <p>${issue.assignee}</p>
                         </div>
                         <div>
                             <p>${issue.createdAt.slice(0, 10)}</p>
@@ -49,7 +77,7 @@ function displayIssues(issues) {
                             <div id="priority-btn"></div>
                         </figure>
                         <div class="mt-3">
-                            <h2 class="card-title">${issue.title}</h2>
+                            <h2 onclick="openModal('${issue.id}')" class="card-title">${issue.title}</h2>
                             <p class="line-clamp-2">${issue.description}
                             </p>
                             <div class="card-actions justify-start mt-3 flex" id="label-buttons">
@@ -62,8 +90,8 @@ function displayIssues(issues) {
 
                     <div class=" rounded-2xl p-3 h-22 flex justify-between ">
                         <div>
-                            <p>#${count++} ${issue.author}</p>
-                            <p>assignee ${issue.assignee}</p>
+                            <p>#${unique} ${issue.author}</p>
+                            <p> ${issue.assignee}</p>
                         </div>
                         <div>
                             <p>${issue.createdAt.slice(0, 10)}</p>
@@ -159,7 +187,80 @@ function priorityBtnSelector(priority) {
     return btn;
 }
 
+async function openModal(issueId) {
+    // console.log(issueId);
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issue/${issueId}`);
+    const data = await res.json();
+    const issueDetail = data.data;
+    // console.log(issueDetail.title);
 
+    issueDetailsModal.showModal();
+    dialog = `<div class="modal-box">
+    <h1 class="font-bold" id="modal-title">${issueDetail.title}</h1>
+    <div id="modal-description" class="flex gap-2 items-center justify-start">
+        <div id="modal-status">${openCloseBtn(issueDetail.status)}</div>
+        <div class="border h-1 w-1 rounded-2xl border-[#64748B]"></div>
+        <div>
+            <p>${issueDetail.author}</p>
+        </div>
+        <div class="border h-1 w-1 rounded-2xl border-[#64748B]"></div>
+        <div>
+            <p>${issueDetail.createdAt.slice(0, 10)}</p>
+        </div>
+    </div>
+    <div id="modal-label" class="my-6">
 
+    </div>
+    <div>
+        <p id="modal-content">${issueDetail.description}</p>
+    </div>
+    <div class="flex justify-between p-4 bg-[#F8FAFC] rounded-2xl my-6">
+        <div>
+            <p>Assignee: </p>
+            <p id="modal-assignee-name">${issueDetail.assignee}</p>
+        </div>
+        <div id="modal-priority-container">
+            <p id="modal-priority">Priority:</p>
+            ${priorityBtnSelector(issueDetail.priority).outerHTML}
+        </div>
+    </div>
+    <div class="flex justify-end">
+        <button class="btn btn-primary" onclick="issueDetailsModal.close()">Close</button>
+    </div>
+</div>`
+
+    issueDetailsModal.innerHTML = dialog;
+
+    function openCloseBtn(status) {
+        if (status === "open") {
+            return `<button class="btn btn-soft rounded-4xl btn-success">Open</button>`;
+        }
+        return `<button class="btn btn-soft rounded-4xl btn-primary">Closed</button>`;
+    }
+
+    issueDetail.labels.forEach(label => {
+        const labelContainer = document.getElementById("modal-label");
+        labelContainer.appendChild(labelCheker(label));
+    });
+
+}
+
+const searchInput = document.getElementById("input-text");
+// console.log(searchInput);
+
+searchInput.addEventListener("input", async function () {
+    const keyword = searchInput.value.trim().toLowerCase();
+
+    if (!keyword) {
+        await issues();
+        return;
+    }
+
+    const res = await fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${keyword}`);
+    const data = await res.json();
+
+    renderIssueCards(data.data);
+    
+});
 
 issues();
