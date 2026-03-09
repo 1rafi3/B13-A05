@@ -23,8 +23,9 @@ function btnController(button) {
     openBtn.classList.remove("btn-primary");
     closed.classList.remove("btn-primary");
 
+    
     button.classList.add("btn-primary");
-
+    
 }
 
 
